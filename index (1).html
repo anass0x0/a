@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>أنس | روابطي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #00e5ff;
+      --accent2: #7c4dff;
+      --text: #f0f0ff;
+      --muted: rgba(240,240,255,0.45);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Tajawal', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatBlob 8s ease-in-out infinite alternate;
+    }
+    .blob-1 {
+      width: 400px; height: 400px;
+      background: rgba(0,229,255,0.07);
+      top: -100px; left: -100px;
+    }
+    .blob-2 {
+      width: 350px; height: 350px;
+      background: rgba(124,77,255,0.08);
+      bottom: -80px; right: -80px;
+      animation-delay: -4s;
+    }
+    @keyframes floatBlob {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,30px) scale(1.1); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      margin-bottom: 20px;
+      animation: fadeDown 0.6s ease both;
+    }
+    .avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(var(--surface), var(--surface)) padding-box,
+                  linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+    }
+    .avatar-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,229,255,0.2);
+      animation: spin 8s linear infinite;
+    }
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 50%; right: -4px;
+      transform: translateY(-50%);
+      box-shadow: 0 0 10px var(--accent);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .name {
+      font-size: 1.7rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeDown 0.6s 0.1s ease both;
+    }
+    .handle {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-top: 2px;
+      animation: fadeDown 0.6s 0.15s ease both;
+    }
+    .bio {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.8;
+      max-width: 320px;
+      animation: fadeDown 0.6s 0.2s ease both;
+    }
+
+    .divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 20px 0;
+      animation: fadeDown 0.6s 0.25s ease both;
+    }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .link-btn:hover::before { opacity: 1; }
+    .link-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .course::before    { background: linear-gradient(135deg, rgba(255,215,0,0.07), transparent); }
+    .course:hover      { border-color: rgba(255,215,0,0.4); }
+    .instagram::before { background: linear-gradient(135deg, rgba(225,48,108,0.06), transparent); }
+    .instagram:hover   { border-color: rgba(225,48,108,0.3); }
+    .telegram::before  { background: linear-gradient(135deg, rgba(0,136,204,0.08), transparent); }
+    .telegram:hover    { border-color: rgba(0,136,204,0.35); }
+    .tiktok::before    { background: linear-gradient(135deg, rgba(255,0,80,0.06), transparent); }
+    .tiktok:hover      { border-color: rgba(255,0,80,0.3); }
+    .email-btn::before { background: linear-gradient(135deg, rgba(0,229,255,0.07), transparent); }
+    .email-btn:hover   { border-color: rgba(0,229,255,0.35); }
+
+    .icon-box {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .link-info { flex: 1; display: flex; flex-direction: column; }
+    .link-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    .arrow {
+      font-size: 0.75rem;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: all 0.2s ease;
+    }
+    .link-btn:hover .arrow { opacity: 1; transform: translateX(0); }
+
+    .link-btn:nth-child(1) { animation-delay: 0.28s; }
+    .link-btn:nth-child(2) { animation-delay: 0.33s; }
+    .link-btn:nth-child(3) { animation-delay: 0.38s; }
+    .link-btn:nth-child(4) { animation-delay: 0.43s; }
+    .link-btn:nth-child(5) { animation-delay: 0.48s; }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.18);
+      animation: fadeUp 0.5s 0.65s ease both;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="container">
+
+    <div class="avatar-wrap">
+      <div class="avatar">💡</div>
+      <div class="avatar-ring"></div>
+    </div>
+
+    <div class="name">أنس</div>
+    <div class="handle">@anass0x0</div>
+
+    <p class="bio">
+      أمن سيبراني | فكر | كتب | رياضة<br>
+      Mindset°<br>
+      🎓 كورس مجاني في الأمن السيبراني (للمبتدئ)
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="links">
+
+      <!-- 1. كورس — أول -->
+      <a href="https://academy.hackingeek.com/cyberseed" target="_blank" class="link-btn course">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span>🎓 كورس مجاني الأمن في السيبراني (للمبتدئ)</span>
+          <span class="link-label">academy.hackingeek.com/cyberseed</span>
+        </div>
+        <span class="arrow">←</span>
+      </a>
+
+      <!-- 2. Instagram — ثاني -->
+      <a href="https://instagram.com/anass0x0" target="_blank" class="link-btn instagram">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="url(#igGrad)">
+            <defs>
+              <linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#F58529"/>
+                <stop offset="50%" stop-color="#DD2A7B"/>
+                <stop offset="100%" stop-color="#8134AF"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span>Instagram</span>
+          <span class="link-label">@anass0x0</span>
+        </div>
+        <span class="arrow">←</span>
+      </a>
+
+      <!-- 3. Telegram -->
+      <a href="https://t.me/Anass0x0" target="_blank" class="link-btn telegram">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#29B6F6">
+            <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.94 8.19l-2.02 9.52c-.15.67-.54.84-1.09.52l-3-2.21-1.45 1.39c-.16.16-.3.3-.61.3l.22-3.07 5.6-5.06c.24-.22-.05-.34-.38-.12L7.16 14.3 4.23 13.4c-.65-.2-.66-.65.14-.96l11.6-4.47c.55-.2 1.02.13.97.22z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span>Telegram</span>
+          <span class="link-label">t.me/Anass0x0</span>
+        </div>
+        <span class="arrow">←</span>
+      </a>
+
+      <!-- 4. TikTok -->
+      <a href="https://www.tiktok.com/@anass0x0" target="_blank" class="link-btn tiktok">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span>TikTok</span>
+          <span class="link-label">tiktok.com/@anass0x0</span>
+        </div>
+        <span class="arrow">←</span>
+      </a>
+
+      <!-- 5. Gmail — آخر -->
+      <a href="mailto:anass@hackingeek.com" class="link-btn email-btn">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span>البريد الإلكتروني</span>
+          <span class="link-label">anass@hackingeek.com</span>
+        </div>
+        <span class="arrow">←</span>
+      </a>
+
+    </div>
+
+    <div class="footer">© 2025 أنس · anass0x0</div>
+  </div>
+</body>
+</html>
